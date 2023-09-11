@@ -40,8 +40,13 @@ namespace ContosoUniversity
             app.Run();
 
         }
-    }
 
+        public static void CreateDbIfNotExists(WebApplication app) {
+            using (var scope = app.Services.CreateScope()) { 
+            
+            }
+        }
+    }
 }
 
 
