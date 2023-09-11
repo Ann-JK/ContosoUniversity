@@ -1,6 +1,14 @@
 using ContosoUniversity.Data;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+
+namespace ContosoUniversity
+{
+
+
+
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +28,7 @@ CreateDbIfNotExists(host);
 
 host.Run();
 
-static void CreateDbIfNotExists(IHost host) {
+public static void CreateDbIfNotExists(IHost host) {
     using (var scope = host.Services.CreateScope())
     {
         var services = scope.ServiceProvider;
@@ -37,6 +45,12 @@ static void CreateDbIfNotExists(IHost host) {
     }
 }
 
+static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Startup>();
+        });
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
