@@ -23,16 +23,25 @@ namespace ContosoUniversity
 
             var app = builder.Build();
 
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Run();
+
         }
     }
 
 }
 
-var host = CreateHostBuilder(args).Build();
-
-CreateDbIfNotExists(host);
-
-host.Run();
 
 public static void CreateDbIfNotExists(IHost host) {
     using (var scope = host.Services.CreateScope())
@@ -65,16 +74,3 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();
