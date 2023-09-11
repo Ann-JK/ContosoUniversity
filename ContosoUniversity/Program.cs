@@ -1,5 +1,6 @@
 using ContosoUniversity.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,20 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
+
+var host = CreateHostBuilder(args).Build();
+
+CreateDbIfNotExists(host);
+
+host.Run();
+
+static void CreateDbIfNotExists(IHost host) {
+    using (var scope = host.Services.CreateScope())
+    {
+
+    }
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
