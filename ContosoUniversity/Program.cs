@@ -23,6 +23,8 @@ namespace ContosoUniversity
 
             var app = builder.Build();
 
+            CreateDbIfNotExists(app);
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -59,13 +61,6 @@ public static void CreateDbIfNotExists(IHost host) {
         }
     }
 }
-
-static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseStartup<Startup>();
-        });
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
