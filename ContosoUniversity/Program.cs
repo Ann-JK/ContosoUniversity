@@ -42,23 +42,26 @@ namespace ContosoUniversity
         }
 
         public static void CreateDbIfNotExists(WebApplication app) {
-            using (var scope = app.Services.CreateScope()) { 
-            
+            using (var scope = app.Services.CreateScope()) {
+
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<SchoolContext>();
+                    DbInitializer.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+
+                }
             }
+
         }
     }
 }
 
 
-public static void CreateDbIfNotExists(IHost host) {
-    using (var scope = host.Services.CreateScope())
-    {
-        var services = scope.ServiceProvider;
-        try
-        {
-            var context = services.GetRequiredService<SchoolContext>();
-            DbInitializer.Initialize(context);
-        }
         catch (Exception ex)
         {
             var logger = services.GetRequiredService<ILogger<Program>>();
