@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
 {
@@ -10,6 +11,7 @@ namespace ContosoUniversity.Models
         public string LastName { get; set; }
 
         [StringLength(50)]
+        [Column("First_Name")]
         public string FirstName { get; set; }
 
         [DataType(DataType.Date)]
