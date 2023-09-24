@@ -16,7 +16,7 @@ namespace ContosoUniversity.Models
         [Column("FirstName")]
         [Display(Name = "First Name")]
         [StringLength(50)]
-        public string FirstMidName { get; set; }
+        public string FirstdName { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
